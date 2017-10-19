@@ -3,3 +3,5 @@
 /build
 /out
 /tmp
+/logs
+RUNNING_PID
