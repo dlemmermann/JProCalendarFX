@@ -1,0 +1,296 @@
+.root {
+    -fx-font-family: "Rubik Medium";
+    -fx-font-size: 13;
+    -toolbar-text-fill: white;
+    -toolbar-background-color: rgb(43, 43, 43);
+    -toolbar-button-pressed-color: rgba(255, 255, 255, .4);
+    -toolbar-button-selected-color: rgba(255, 255, 255, .1);
+
+    -drop-shadow-1: dropshadow(gaussian, rgba(0, 0, 0, .26), 10, 0.12, -1, 2);
+    -drop-shadow-2: dropshadow(gaussian, rgba(0, 0, 0, .26), 15, 0.16, -1, 4);
+    -drop-shadow-3: dropshadow(gaussian, rgba(0, 0, 0, .26), 20, 0.19, -1, 6);
+
+    -slate-green: #63946a;
+    -greyish-brown: #4a4a4a;
+    -yellowish-orange: #ffa208;
+    -greyish-brown-two: #595959;
+    -vivid-purple: #9012fe;
+    -tomato: #e94b35;
+    -charcoal-grey: #3b424c;
+    -steel: #7a8390;
+    -white: #ebebeb;
+    -greyish: #a3a3a3;
+    -white-two: #f6f6f4;
+    -white-three: #fbfbfb;
+    -white-four: #ffffff;
+}
+
+/* ----------------------------------------------------------------------------
+ * Module toolbar.
+ */
+.module-toolbar {
+    -fx-spacing: 0;
+    -fx-padding: 0 20 0 0;
+    -fx-fill-height: true;
+    -fx-alignment: center-left;
+    -fx-pref-height: 60;
+}
+
+.module-toolbar .buttons {
+    -fx-spacing: 10;
+    -fx-fill-height: true;
+    -fx-alignment: center;
+    -fx-padding: 0 15 0 0;
+}
+
+.module-toolbar .separator:vertical .line {
+    -fx-border-color: rgba(255, 255, 255, .2);
+    -fx-border-width: 1;
+}
+
+.module-toolbar .text-field {
+    -fx-background-color: rgba(0, 0, 0, .2);
+    -fx-background-radius: 1000;
+    -fx-text-fill: white;
+    -fx-padding: 8 8 8 16;
+}
+
+.module-toolbar .text-field .clear-search {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-graphic: url("icons/clear-search-icon.png");
+}
+
+.module-toolbar .controls {
+    -fx-alignment: center-left;
+    -fx-padding: 5 10 0 10;
+}
+
+.module-toolbar .close-button,
+.module-toolbar .minimize-button,
+.module-toolbar .search-button {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar {
+    -fx-background-color: transparent;
+    -fx-padding: 2;
+}
+
+.scroll-bar:vertical .decrement-button,
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-arrow,
+.scroll-bar:vertical .increment-arrow {
+    -fx-pref-height: 0;
+    -fx-pref-width: 8;
+}
+
+.scroll-bar:horizontal .decrement-button,
+.scroll-bar:horizontal .increment-button,
+.scroll-bar:horizontal .decrement-arrow,
+.scroll-bar:horizontal .increment-arrow {
+    -fx-pref-height: 8;
+    -fx-pref-width: 0;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: rgba(0, 0, 0, .2);
+    -fx-background-insets: 0 0 0 2;
+    -fx-background-radius: 12;
+    -fx-border-width: 0;
+    -fx-border-insets: 0;
+    -fx-padding: 0;
+}
+
+.primary-color-calendar {
+    -fx-background-color: -slate-green !important;
+}
+
+.calendar-toolbar {
+}
+
+.calendar-toolbar .text-field {
+    -fx-prompt-text-fill: derive(-slate-green, 20%);
+}
+
+.calendar-toolbar .switcher {
+    -fx-padding: 15;
+}
+
+.calendar-toolbar .toggle-button {
+    -fx-background-color: rgba(0, 0, 0, .2);
+    -fx-background-radius: 0;
+    -fx-text-fill: derive(-slate-green, 20%);
+    -fx-padding: 10 20 10 20;
+}
+
+.calendar-toolbar .toggle-button:selected {
+    -fx-text-fill: white;
+    -fx-background-color: rgba(255, 255, 255, .2);
+}
+
+.calendar-toolbar .toggle-button.first {
+    -fx-background-radius: 4 0 0 4 !important;
+}
+
+.calendar-toolbar .toggle-button.last {
+    -fx-background-radius: 0 4 4 0 !important;
+}
+
+.calendar-view .scroll-pane {
+    -fx-background-color: white;
+}
+
+.calendar-page {
+    -fx-background-color: -white-two !important;
+}
+
+.source-view {
+    -fx-background-color: white !important;
+}
+
+#date-picker {
+    -fx-background-color: white !important;
+}
+
+.calendar-page > .container > .header {
+    -fx-padding: 30;
+}
+
+.calendar-page > .container > .header > .date-text {
+    -fx-font-family: "Rubik Light";
+    -fx-font-size: 2.2em;
+}
+
+.calendar-page .navigation-button-bar .button {
+    -fx-background-color: linear-gradient(to bottom, -white-four, -white-two) !important;
+    -fx-border-color: lightgray !important;
+    -fx-text-fill: -slate-green !important;
+    -fx-padding: 10 20 10 20 !important;
+}
+
+.calendar-page .navigation-button-bar .previous-date-button {
+    -fx-text-fill: gray !important;
+    -fx-background-radius: 4 0 0 4;
+    -fx-border-radius: 4 0 0 4;
+    -fx-border-width: 1 0 1 1;
+}
+
+.calendar-page .navigation-button-bar .next-date-button {
+    -fx-text-fill: gray !important;
+    -fx-background-radius: 0 4 4 0;
+    -fx-border-radius: 0 4 4 0;
+    -fx-border-width: 1 1 1 0;
+}
+
+/* ----------------------------------------------------------------------------
+ * Month Calendar.
+ */
+
+#date-picker {
+
+}
+
+#date-picker .day-of-week-label {
+    -fx-border-color: transparent;
+    -fx-text-fill: -greyish;
+}
+
+#date-picker .month-day {
+    -fx-text-fill: gray;
+    -fx-padding: 10;
+    -fx-font-size: 14px;
+}
+
+#date-picker .day-not-of-month-label {
+    -fx-text-fill: transparent;
+}
+
+#date-picker .selected-month-date {
+    -fx-background-color: rgba(238, 238, 238);
+    -fx-background-radius: 1000;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+}
+
+#date-picker .weekend-day {
+    -fx-background-color: white;
+}
+
+#date-picker .month-label {
+    -fx-font-size: 15;
+    -fx-text-fill: -greyish-brown-two;
+}
+
+#date-picker .year-label {
+    -fx-font-size: 15;
+    -fx-text-fill: -greyish-brown-two;
+}
+
+#date-picker .container {
+    -fx-padding: 20 ;
+}
+
+#date-picker .previous-button,
+#date-picker .next-button,
+#date-picker .previous-button,
+#date-picker .next-button {
+    -fx-background-color: -greyish-brown-two;
+    -fx-pref-width: 8.0;
+    -fx-pref-height: 8.0;
+    -fx-max-width: 8.0;
+    -fx-max-height: 8.0;
+}
+
+#date-picker .previous-button:hover,
+#date-picker .next-button:hover,
+#date-picker .previous-button:hover,
+#date-picker .next-button:hover {
+    -fx-background-color: lightgray;
+}
+
+#date-picker .previous-button:pressed,
+#date-picker .next-button:pressed,
+#date-picker .previous-button:pressed,
+#date-picker .next-button:pressed {
+    -fx-background-color: gray;
+}
+
+#date-picker .previous-button,
+#date-picker .previous-button {
+    -fx-shape: "M3,0 V3 L0 1.5 L3,0 Z";
+}
+
+#date-picker .next-button,
+#date-picker .next-button {
+    -fx-shape: "M0,0 L3 1.5 L0,3 V0 Z";
+}
+
+/* ----------------------------------------------------------------------------
+ * Source view.
+ */
+
+.source-view .text {
+    -fx-text-fill: -charcoal-grey;
+    -fx-font-family: "Rubik Regular";
+    -fx-font-size: 14px;
+}
+
+/* ----------------------------------------------------------------------------
+ * Search result view.
+ */
+
+.search-result-view .list-cell {
+    -fx-background-color: -white-four;
+    -fx-padding: 10;
+}
+
+.search-result-view .list-cell .label {
+    -fx-font-size: 14 !important;
+}
+
+.search-result-view .list-cell .container {
+    -fx-padding: 0 0 30 0;
+}
+
+

@@ -1,0 +1,74 @@
+group 'com.jpro'
+version '1.0.0-SNAPSHOT'
+
+/**
+ ******************  Java Configuration ******************
+ */
+apply plugin: 'java'
+apply plugin: 'application'
+
+compileJava {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+/**
+ ******************  Script Configuration ******************
+ */
+buildscript {
+  repositories {
+    mavenLocal()
+    maven {
+      url "http://sandec.bintray.com/repo"
+    }
+    jcenter()
+  }
+
+    dependencies {
+        classpath 'com.jprotechnologies.jpro:jpro-plugin-gradle:2017.1.0-SNAPSHOT'
+    }
+
+}
+
+dependencies {
+    compile fileTree(dir: 'lib', include: ['*.jar'])
+    compile fileTree(dir: 'ext', include: ['*.jar'])
+}
+
+repositories {
+  jcenter()
+  mavenLocal()
+}
+
+
+/**
+ ******************  jpro Configuration ******************
+ */
+apply plugin: 'com.jprotechnologies.jpro'
+
+jproStartCommand {
+  //jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,address=5006,suspend=y'
+}
+
+/**
+ * App Main Class
+ */
+mainClassName = 'com.dlsc.jpro.calendar.CalendarJProMain'
+
+/**
+ * jpro settings
+ */
+
+jpro {
+  //jpro server port
+  useGradleLogging = true
+  port = 8080
+
+  //wenn mehrere Stags über eine main() gestartet werden
+  //useMainMethod=true
+
+  //jpro version
+  jproVersion = "2017.1.0-SNAPSHOT"
+
+  openingPath = "/test/fullscreen/default"
+}
