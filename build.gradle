@@ -26,6 +26,7 @@ buildscript {
 
     dependencies {
         classpath "com.sandec.jpro:jpro-plugin-gradle:$JPRO_PLUGIN_VERSION"
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 
 }
@@ -71,28 +72,4 @@ jpro {
   jproVersion = "$JPRO_VERSION"
 
   openingPath = "/test/fullscreen/default"
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            groupId project.group
-            artifactId project.name
-            version project.version
-        }
-    }
-}
-
-bintray {
-    user = BINTRAY_USER
-    key = BINTRAY_KEY
-    publications = ['mavenJava']
-    publish = true
-    override = true
-    pkg {
-        repo = 'apps'
-        name = project.name
-        userOrg = 'sandec'
-    }
 }
