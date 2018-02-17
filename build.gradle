@@ -25,7 +25,7 @@ buildscript {
   }
 
     dependencies {
-        classpath 'com.jprotechnologies.jpro:jpro-plugin-gradle:2017.1.0-SNAPSHOT'
+        classpath "com.jprotechnologies.jpro:jpro-plugin-gradle:$JPRO_PLUGIN_VERSION"
     }
 
 }
@@ -68,7 +68,7 @@ jpro {
   //useMainMethod=true
 
   //jpro version
-  jproVersion = "2017.1.0-SNAPSHOT"
+  jproVersion = "$JPRO_VERSION"
 
   openingPath = "/test/fullscreen/default"
 }
