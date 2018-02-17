@@ -25,7 +25,7 @@ buildscript {
   }
 
     dependencies {
-        classpath "com.jprotechnologies.jpro:jpro-plugin-gradle:$JPRO_PLUGIN_VERSION"
+        classpath "com.sandec.jpro:jpro-plugin-gradle:$JPRO_PLUGIN_VERSION"
     }
 
 }
@@ -44,7 +44,7 @@ repositories {
 /**
  ******************  jpro Configuration ******************
  */
-apply plugin: 'com.jprotechnologies.jpro'
+apply plugin: 'com.sandec.jpro'
 
 jproStartCommand {
   //jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,address=5006,suspend=y'
@@ -71,4 +71,28 @@ jpro {
   jproVersion = "$JPRO_VERSION"
 
   openingPath = "/test/fullscreen/default"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId project.name
+            version project.version
+        }
+    }
+}
+
+bintray {
+    user = BINTRAY_USER
+    key = BINTRAY_KEY
+    publications = ['mavenJava']
+    publish = true
+    override = true
+    pkg {
+        repo = 'apps'
+        name = project.name
+        userOrg = 'sandec'
+    }
 }
