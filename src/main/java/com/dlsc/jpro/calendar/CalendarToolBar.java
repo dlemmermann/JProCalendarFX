@@ -25,25 +25,26 @@ public class CalendarToolBar extends HBox{
         ToggleButton showDay = new ToggleButton("DAY");
         ToggleButton showWeek = new ToggleButton("WEEK");
         ToggleButton showMonth = new ToggleButton("MONTH");
-        ToggleButton showYear = new ToggleButton("YEAR");
+        //ToggleButton showYear = new ToggleButton("YEAR");
 
         showDay.setOnAction(evt -> showDayPage());
         showWeek.setOnAction(evt -> showWeekPage());
         showMonth.setOnAction(evt -> showMonthPage());
-        showYear.setOnAction(evt -> showYearPage());
+        //showYear.setOnAction(evt -> showYearPage());
 
         showDay.getStyleClass().add("first");
-        showYear.getStyleClass().add("last");
+        showMonth.getStyleClass().add("last");
+        //showYear.getStyleClass().add("last");
 
         showDay.setSelected(true);
         showDay.setMaxHeight(Double.MAX_VALUE);
         showWeek.setMaxHeight(Double.MAX_VALUE);
         showMonth.setMaxHeight(Double.MAX_VALUE);
-        showYear.setMaxHeight(Double.MAX_VALUE);
+        //showYear.setMaxHeight(Double.MAX_VALUE);
 
-        group.getToggles().addAll(showDay, showWeek, showMonth, showYear);
+        group.getToggles().addAll(showDay, showWeek, showMonth);
 
-        HBox switcher = new HBox(showDay, showWeek, showMonth, showYear);
+        HBox switcher = new HBox(showDay, showWeek, showMonth);
         switcher.getStyleClass().add("switcher");
         switcher.setFillHeight(true);
         switcher.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
