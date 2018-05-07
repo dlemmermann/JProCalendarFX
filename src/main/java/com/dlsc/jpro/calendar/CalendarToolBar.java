@@ -34,7 +34,6 @@ public class CalendarToolBar extends HBox{
 
         showDay.getStyleClass().add("first");
         showMonth.getStyleClass().add("last");
-        //showYear.getStyleClass().add("last");
 
         showDay.setSelected(true);
         showDay.setMaxHeight(Double.MAX_VALUE);
@@ -42,9 +41,9 @@ public class CalendarToolBar extends HBox{
         showMonth.setMaxHeight(Double.MAX_VALUE);
         //showYear.setMaxHeight(Double.MAX_VALUE);
 
-        group.getToggles().addAll(showDay, showWeek, showMonth);
+        group.getToggles().addAll(showDay, showWeek, showMonth/*, showYear*/);
 
-        HBox switcher = new HBox(showDay, showWeek, showMonth);
+        HBox switcher = new HBox(showDay, showWeek, showMonth/*, showYear*/);
         switcher.getStyleClass().add("switcher");
         switcher.setFillHeight(true);
         switcher.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);

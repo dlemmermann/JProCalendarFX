@@ -20,10 +20,6 @@ public class CalendarJProMain extends Application
 
     public void start(Stage stage) {
 
-        if (!CalendarFX.isLicenseKeySet()) {
-            CalendarFX.setLicenseKey("LIC=DLSC;VEN=DLSC;VER=1;PRO=STANDARD;RUN=no;CTR=1;SignCode=3F;Signature=302D021500801FD2BF07754E3F3DC2F8858974090B55B0FB7702145059A46432EDD5287F8C08499AE7CB59FE7CBB91");
-        }
-
         CalendarView calendarView = new CalendarView();
 
         Calendar dirk = new Calendar("Dirk");

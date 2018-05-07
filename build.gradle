@@ -1,5 +1,5 @@
 group 'com.jpro'
-version '1.0.0-SNAPSHOT'
+version '1.0.2'
 
 /**
  ******************  Java Configuration ******************
@@ -32,8 +32,7 @@ buildscript {
 }
 
 dependencies {
-    compile fileTree(dir: 'lib', include: ['*.jar'])
-    compile fileTree(dir: 'ext', include: ['*.jar'])
+    compile group: 'com.calendarfx', name: 'view', version: '8.4.2'
 }
 
 repositories {
@@ -46,6 +45,8 @@ repositories {
  ******************  jpro Configuration ******************
  */
 apply plugin: 'com.sandec.jpro'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
 
 jproStartCommand {
   //jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,address=5006,suspend=y'
@@ -72,4 +73,31 @@ jpro {
   jproVersion = "$JPRO_VERSION"
 
   openingPath = "/test/fullscreen/default"
+}
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId project.name
+            version project.version
+        }
+    }
+}
+
+bintray {
+    if(project.hasProperty("BINTRAY_USER")) {
+        user = BINTRAY_USER
+        key  = BINTRAY_KEY
+    }
+    publications = ['mavenJava']
+    publish = true
+    override = true
+    pkg {
+        repo = 'apps'
+        name = project.name
+        userOrg = 'sandec'
+    }
 }
