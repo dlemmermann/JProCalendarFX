@@ -1,37 +1,41 @@
 
+[JPro](https://www.jpro.one/) can be used to run JavaFX in the browser.
+
+This application can be viewed here: https://demos.jpro.one/calendar.html
+
 ![alt text](screen.png "Screenshot")
 
 
-# How to start HelloJPro #
+# How to start JProCalendarFX #
 
 
 ## Web Browser ##
 
-### Start jpro in foreground (development mode) ###
+### Start JPro in foreground (development mode) ###
 
 ```
 gradle jproRun
 ```
 
 
-### Start jpro in background (server mode) ###
+### Start JPro in background (server mode) ###
 
 ```
 gradle jproRestart
 ```
 
 
-### Open jpro app in Web Browser ###
+### Open JPro app in Web Browser ###
 ```
 http://localhost:8080/index.html
 ```
 
-### Show all jpro apps in Browser ####
+### Show all JPro apps in Browser ####
 ```
 http://localhost:8080/test/default
 ```
 
-### Open jpro app in fullscreen ####
+### Open JPro app in fullscreen ####
 ```
 http://localhost:8080/test/fullscreen/[app-name]
 ```
