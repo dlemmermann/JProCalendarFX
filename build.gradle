@@ -32,7 +32,19 @@ buildscript {
 }
 
 dependencies {
-    compile group: 'com.calendarfx', name: 'view', version: '8.4.2'
+    compile fileTree(dir: 'lib', include: ['*.jar'])
+}
+
+afterEvaluate {
+    run {
+        doFirst {
+            jvmArgs = [
+                    '--module-path', classpath.asPath,
+                    '--add-modules', 'javafx.fxml,javafx.controls',
+                    '--add-exports', 'javafx.base/com.sun.javafx.runtime=ALL-UNNAMED'
+            ]
+        }
+    }
 }
 
 repositories {
