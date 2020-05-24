@@ -1,5 +1,5 @@
 group 'com.jpro'
-version '1.0.3'
+version '1.1.0'
 
 /**
  ******************  Java Configuration ******************
@@ -8,8 +8,8 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 compileJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
+    sourceCompatibility = 11
+    targetCompatibility = 11
 }
 
 /**
@@ -18,6 +18,8 @@ compileJava {
 buildscript {
   repositories {
     mavenLocal()
+      gradlePluginPortal()
+
     maven {
       url "http://sandec.bintray.com/repo"
     }
@@ -26,13 +28,18 @@ buildscript {
 
     dependencies {
         classpath "com.sandec.jpro:jpro-plugin-gradle:$JPRO_PLUGIN_VERSION"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
+        classpath 'org.openjfx:javafx-plugin:0.0.8'
     }
 
 }
 
 dependencies {
-    compile fileTree(dir: 'lib', include: ['*.jar'])
+    compile group: 'com.calendarfx', name: 'recurrence', version: '11.6.4'
+    compile group: 'com.calendarfx', name: 'view', version: '11.6.4'
+
+
+    //compile fileTree(dir: 'lib', include: ['*.jar'])
 }
 
 afterEvaluate {
@@ -59,6 +66,13 @@ repositories {
 apply plugin: 'com.sandec.jpro'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'maven-publish'
+apply plugin: 'org.openjfx.javafxplugin'
+
+
+javafx {
+    version = '11.0.2'
+    modules = [ 'javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml', 'javafx.media', 'javafx.web' ]
+}
 
 jproStartCommand {
   //jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,address=5006,suspend=y'
@@ -81,8 +95,6 @@ jpro {
   //wenn mehrere Stags über eine main() gestartet werden
   //useMainMethod=true
 
-  //jpro version
-  jproVersion = "$JPRO_VERSION"
 
   openingPath = "/test/fullscreen/default"
 }
