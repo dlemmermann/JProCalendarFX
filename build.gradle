@@ -74,9 +74,6 @@ javafx {
     modules = [ 'javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml', 'javafx.media', 'javafx.web' ]
 }
 
-jproStartCommand {
-  //jvmArgs '-agentlib:jdwp=transport=dt_socket,server=y,address=5006,suspend=y'
-}
 
 /**
  * App Main Class
