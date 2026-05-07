@@ -117,7 +117,6 @@ public class CalendarView extends DateControl {
             }
         });
 
-        dayPage.hiddenProperty().addListener(fixSelectedPageListener);
         dayPage.setDayPageLayout(DayPageLayout.DAY_ONLY);
         fixSelectedPage();
 
@@ -128,16 +127,8 @@ public class CalendarView extends DateControl {
 
     private void fixSelectedPage() {
         PageBase page = getSelectedPage();
-        if (page == null || page.isHidden()) {
-            if (page == dayPage) {
-                selectedPage.set(weekPage);
-            } else if (page == weekPage) {
-                selectedPage.set(monthPage);
-            } else if (page == monthPage) {
-                selectedPage.set(yearPage);
-            } else if (page == yearPage) {
-                selectedPage.set(dayPage);
-            }
+        if (page == null) {
+            selectedPage.set(dayPage);
         }
     }
 
@@ -174,7 +165,6 @@ public class CalendarView extends DateControl {
     public final WeekPage getWeekPage() {
         if (weekPage == null) {
             weekPage = new WeekPage();
-            weekPage.hiddenProperty().addListener(fixSelectedPageListener);
             bind(weekPage, true);
         }
         return weekPage;
@@ -188,7 +178,6 @@ public class CalendarView extends DateControl {
     public final MonthPage getMonthPage() {
         if (monthPage == null) {
             monthPage = new MonthPage();
-            monthPage.hiddenProperty().addListener(fixSelectedPageListener);
             bind(monthPage, true);
         }
         return monthPage;
@@ -202,7 +191,6 @@ public class CalendarView extends DateControl {
     public final YearPage getYearPage() {
         if (yearPage == null) {
             yearPage = new YearPage();
-            yearPage.hiddenProperty().addListener(fixSelectedPageListener);
             bind(yearPage, true);
         }
         return yearPage;
@@ -712,16 +700,7 @@ public class CalendarView extends DateControl {
      */
     public final void showDate(LocalDate date) {
         requireNonNull(date);
-        if (!dayPage.isHidden()) {
-            selectedPage.set(getDayPage());
-        } else if (!weekPage.isHidden()) {
-            selectedPage.set(getWeekPage());
-        } else if (!monthPage.isHidden()) {
-            selectedPage.set(getMonthPage());
-        } else if (!yearPage.isHidden()) {
-            selectedPage.set(getYearPage());
-        }
-
+        selectedPage.set(getDayPage());
         setDate(date);
     }
 
@@ -738,14 +717,7 @@ public class CalendarView extends DateControl {
         if (weekOfYear < 1) {
             throw new IllegalArgumentException("illegal value for week of year: " + weekOfYear);
         }
-        if (!weekPage.isHidden()) {
-            selectedPage.set(getWeekPage());
-        } else if (!monthPage.isHidden()) {
-            selectedPage.set(getMonthPage());
-        } else if (!yearPage.isHidden()) {
-            selectedPage.set(getYearPage());
-        }
-
+        selectedPage.set(getWeekPage());
         setDate(LocalDate.of(year.getValue(), 1, 1).plusWeeks(weekOfYear));
     }
 
@@ -760,15 +732,7 @@ public class CalendarView extends DateControl {
     public final void showDateTime(LocalDateTime dateTime) {
         requireNonNull(dateTime);
 
-        if (!dayPage.isHidden()) {
-            selectedPage.set(getDayPage());
-        } else if (!weekPage.isHidden()) {
-            selectedPage.set(getWeekPage());
-        } else if (!monthPage.isHidden()) {
-            selectedPage.set(getMonthPage());
-        } else if (!yearPage.isHidden()) {
-            selectedPage.set(getYearPage());
-        }
+        selectedPage.set(getDayPage());
 
         setDate(dateTime.toLocalDate());
         setRequestedTime(dateTime.toLocalTime());
@@ -784,11 +748,7 @@ public class CalendarView extends DateControl {
     public final void showYearMonth(YearMonth yearMonth) {
         requireNonNull(yearMonth);
 
-        if (!monthPage.isHidden()) {
-            selectedPage.set(getMonthPage());
-        } else if (!yearPage.isHidden()) {
-            selectedPage.set(getYearPage());
-        }
+        selectedPage.set(getMonthPage());
 
         setDate(yearMonth.atDay(1));
     }
@@ -802,10 +762,8 @@ public class CalendarView extends DateControl {
      */
     public final void showYear(Year year) {
         requireNonNull(year);
-        if (!yearPage.isHidden()) {
-            selectedPage.set(getYearPage());
-            setDate(year.atDay(1));
-        }
+        selectedPage.set(getYearPage());
+        setDate(year.atDay(1));
     }
 
     private final String CALENDAR_VIEW_CATEGORY = "Calendar View"; //$NON-NLS-1$

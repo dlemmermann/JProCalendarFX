@@ -3,11 +3,14 @@ package com.dlsc.jpro.calendar;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Calendar.Style;
 import com.calendarfx.model.CalendarSource;
+import com.calendarfx.model.Entry;
 import com.calendarfx.util.CalendarFX;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.time.ZonedDateTime;
 
 public class CalendarJProMain extends Application
 {
@@ -21,6 +24,13 @@ public class CalendarJProMain extends Application
     public void start(Stage stage) {
 
         CalendarView calendarView = new CalendarView();
+
+        calendarView.setEntryFactory(param -> {
+            ZonedDateTime time = param.getZonedDateTime();
+            Entry<Object> entry = new Entry<>("New Entry");
+            entry.setInterval(time, time.plusHours(1));
+            return entry;
+        });
 
         Calendar dirk = new Calendar("Dirk");
         Calendar katja = new Calendar("Katja");

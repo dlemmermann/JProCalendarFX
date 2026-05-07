@@ -1,99 +1,59 @@
-group 'com.jpro'
-version '1.1.0'
-
-/**
- ******************  Java Configuration ******************
- */
-apply plugin: 'java'
-apply plugin: 'application'
-
-compileJava {
-    sourceCompatibility = 11
-    targetCompatibility = 11
-}
-
-/**
- ******************  Script Configuration ******************
- */
 buildscript {
-  repositories {
-    mavenLocal()
-      gradlePluginPortal()
-
-    maven {
-      url "http://sandec.bintray.com/repo"
-    }
-    jcenter()
-  }
-
-    dependencies {
-        classpath "com.sandec.jpro:jpro-plugin-gradle:$JPRO_PLUGIN_VERSION"
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.5'
-        classpath 'org.openjfx:javafx-plugin:0.0.8'
-    }
-
-}
-
-dependencies {
-    compile group: 'com.calendarfx', name: 'recurrence', version: '11.6.4'
-    compile group: 'com.calendarfx', name: 'view', version: '11.6.4'
-
-
-    //compile fileTree(dir: 'lib', include: ['*.jar'])
-}
-
-afterEvaluate {
-    run {
-        doFirst {
-            jvmArgs = [
-                    '--module-path', classpath.asPath,
-                    '--add-modules', 'javafx.fxml,javafx.controls',
-                    '--add-exports', 'javafx.base/com.sun.javafx.runtime=ALL-UNNAMED'
-            ]
+    repositories {
+        mavenLocal()
+        gradlePluginPortal()
+        mavenCentral()
+        maven {
+            url "https://sandec.jfrog.io/artifactory/repo"
         }
     }
+    dependencies {
+        classpath "one.jpro:jpro-gradle-plugin:$jproVersion"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven-publish'
+    id 'org.openjfx.javafxplugin' version "$javafxPluginVersion"
+}
+
+apply plugin: 'jpro-gradle-plugin'
+
+group 'com.jpro'
+version "$projectVersion"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 repositories {
-  jcenter()
-  mavenLocal()
+    mavenLocal()
+    mavenCentral()
+    maven {
+        url "https://sandec.jfrog.io/artifactory/repo"
+    }
 }
 
-
-/**
- ******************  jpro Configuration ******************
- */
-apply plugin: 'com.sandec.jpro'
-apply plugin: 'com.jfrog.bintray'
-apply plugin: 'maven-publish'
-apply plugin: 'org.openjfx.javafxplugin'
-
+dependencies {
+    implementation "com.calendarfx:view:$calendarFxVersion"
+}
 
 javafx {
-    version = '11.0.2'
-    modules = [ 'javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml', 'javafx.media', 'javafx.web' ]
+    version = "$javafxVersion"
+    modules = ['javafx.base', 'javafx.graphics', 'javafx.controls', 'javafx.fxml', 'javafx.media', 'javafx.web']
 }
 
-
-/**
- * App Main Class
- */
-mainClassName = 'com.dlsc.jpro.calendar.CalendarJProMain'
-
-/**
- * jpro settings
- */
+application {
+    mainClass = 'com.dlsc.jpro.calendar.CalendarJProMain'
+}
 
 jpro {
-  //jpro server port
-  useGradleLogging = true
-  port = 8080
-
-  //wenn mehrere Stags über eine main() gestartet werden
-  //useMainMethod=true
-
-
-  openingPath = "/test/fullscreen/default"
+    port = 8080
+    useGradleLogging = true
+    openingPath = "/test/fullscreen/default"
 }
 
 
@@ -106,19 +66,16 @@ publishing {
             version project.version
         }
     }
-}
-
-bintray {
-    if(project.hasProperty("BINTRAY_USER")) {
-        user = BINTRAY_USER
-        key  = BINTRAY_KEY
-    }
-    publications = ['mavenJava']
-    publish = true
-    override = true
-    pkg {
-        repo = 'apps'
-        name = project.name
-        userOrg = 'sandec'
+    repositories {
+        if (System.getenv("SANDEC_ARTIFACTORY_USERNAME") && System.getenv("SANDEC_ARTIFACTORY_PASSWORD")) {
+            maven {
+                name = "artifactory"
+                url = "https://sandec.jfrog.io/artifactory/apps"
+                credentials {
+                    username = System.getenv("SANDEC_ARTIFACTORY_USERNAME")
+                    password = System.getenv("SANDEC_ARTIFACTORY_PASSWORD")
+                }
+            }
+        }
     }
 }

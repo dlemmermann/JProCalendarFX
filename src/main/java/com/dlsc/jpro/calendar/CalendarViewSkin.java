@@ -15,8 +15,6 @@ import com.calendarfx.view.YearMonthView;
 import com.calendarfx.view.page.DayPage;
 import com.calendarfx.view.page.PageBase;
 import com.calendarfx.view.print.PrintView;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.utils.FontAwesomeIconFactory;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Side;
@@ -27,8 +25,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 import org.controlsfx.control.MasterDetailPane;
+import org.kordamp.ikonli.fontawesome.FontAwesome;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import static com.calendarfx.view.RequestEvent.REQUEST_DATE;
 import static com.calendarfx.view.RequestEvent.REQUEST_DATE_TIME;
@@ -89,7 +88,7 @@ public class CalendarViewSkin extends SkinBase<CalendarView> {
 
         // toolbar right
 
-        Text searchIcon = FontAwesomeIconFactory.get().createIcon(FontAwesomeIcon.SEARCH);
+        FontIcon searchIcon = new FontIcon(FontAwesome.SEARCH);
         searchIcon.setId("search-icon"); //$NON-NLS-1$
 
         BorderPane borderPane1 = new BorderPane();
